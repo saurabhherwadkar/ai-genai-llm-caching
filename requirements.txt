@@ -1,0 +1,38 @@
+# -------------------------------------------------------------------
+# Python Dependencies for LLM Caching Project
+# Pin versions explicitly for reproducible builds.
+# -------------------------------------------------------------------
+
+# LLM client
+openai==1.82.0
+
+# Sentence embeddings for semantic similarity
+sentence-transformers==3.4.1
+
+# Numeric computation for similarity scoring
+numpy==2.2.6
+
+# Configuration management
+pyyaml==6.0.2
+
+# REST API framework
+fastapi==0.115.12
+uvicorn==0.34.2
+
+# Database
+aiosqlite==0.21.0
+
+# Testing
+pytest==8.3.5
+pytest-asyncio==0.25.3
+pytest-cov==6.1.1
+
+# Linting and formatting
+black==25.1.0
+flake8==7.2.0
+
+# Logging
+python-json-logger==3.3.0
+
+# Environment variable support
+python-dotenv==1.1.0

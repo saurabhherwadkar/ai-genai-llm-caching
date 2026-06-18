@@ -1,0 +1,33 @@
+# -------------------------------------------------------------------
+# pyproject.toml
+# Project metadata and tool configuration for linting and testing.
+# -------------------------------------------------------------------
+
+[project]
+name = "llm-cache"
+version = "1.0.0"
+description = "Intelligent LLM response caching with syntactic and semantic similarity detection"
+requires-python = ">=3.11"
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.flake8]
+max-line-length = 100
+exclude = [".venv", "venv", "__pycache__", "data", "logs"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*", "venv/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 70

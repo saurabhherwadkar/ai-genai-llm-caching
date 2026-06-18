@@ -1,0 +1,36 @@
+# -------------------------------------------------------------------
+# docker-compose.yml
+# Orchestrates the LLM Cache application and dependent services.
+# -------------------------------------------------------------------
+
+version: "3.9"
+
+services:
+  # Main LLM Cache application
+  llm-cache-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: llm-cache-app
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_CACHE_LLM__PROVIDER=mock
+      - LLM_CACHE_LOGGING__LEVEL=INFO
+      - LLM_CACHE_CACHE__BACKEND=sqlite
+      - LLM_CACHE_CACHE__DATABASE_PATH=/app/data/llm_cache.db
+    volumes:
+      - cache-data:/app/data
+      - app-logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  cache-data:
+    driver: local
+  app-logs:
+    driver: local

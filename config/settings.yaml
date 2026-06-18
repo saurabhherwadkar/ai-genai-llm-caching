@@ -1,0 +1,51 @@
+# -------------------------------------------------------------------
+# Application Configuration
+# Settings for the LLM Caching application.
+# Override any value via environment variables prefixed with LLM_CACHE_
+# -------------------------------------------------------------------
+
+# Logging configuration
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARN, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/app.log"
+
+# Cache configuration
+cache:
+  # Storage backend: "memory" or "sqlite"
+  backend: "sqlite"
+  # Path for sqlite database file
+  database_path: "data/llm_cache.db"
+  # Maximum number of entries to store in memory cache
+  max_memory_entries: 1000
+  # Time-to-live for cache entries in seconds (default: 24 hours)
+  ttl_seconds: 86400
+
+# Similarity configuration
+similarity:
+  # Threshold for syntactic similarity (0.0 to 1.0)
+  syntactic_threshold: 0.85
+  # Threshold for semantic similarity (0.0 to 1.0)
+  semantic_threshold: 0.80
+  # Embedding model for semantic similarity
+  embedding_model: "all-MiniLM-L6-v2"
+
+# LLM configuration
+llm:
+  # Provider: "openai" or "mock" (for testing/demo)
+  provider: "mock"
+  # Model name
+  model: "gpt-4"
+  # API key (override via environment variable LLM_CACHE_LLM_API_KEY)
+  api_key: ""
+  # Maximum tokens for response
+  max_tokens: 1024
+  # Temperature for response generation
+  temperature: 0.7
+  # Request timeout in seconds
+  timeout_seconds: 30
+
+# Server configuration (for REST API mode)
+server:
+  host: "0.0.0.0"
+  port: 8000
